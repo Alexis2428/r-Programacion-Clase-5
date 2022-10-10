@@ -15,5 +15,7 @@ const $botonIngresar = document.querySelector('#ingresar');
 $botonIngresar.onclick = function(){
     const nombreUsuario = document.querySelector('#nombre-usuario').value;
     document.querySelector('#datos-usuario').value = organizarDatos(nombreUsuario);
+    const saludo = `Bienvenido, ${nombreUsuario}!`;
+    document.querySelector('#saludo').innerText = saludo;
     return false;
 }
