@@ -7,35 +7,11 @@
     <title>Clase 5</title>
 </head>
 <body>
-    <form>
-        <input type="number" placeholder="Ingresa la cantidad de horas del primer video" id="cantidad-horas-1" />
-        <input type="number" placeholder="Ingresa la cantidad de minutos del primer video" id="cantidad-minutos-1" />
-        <input type="number" placeholder="Ingresa la cantidad de segundos del primer video" id="cantidad-segundos-1" />
+    <form onsubmit="return false">
+        <label for="cantidad-videos">Ingrese cantidad de videos</label>
+        <input type="number" id="cantidad-videos"/>
+        <button type="button" id="continuar">Continuar</button>
     </form>
-    <form>
-        <input type="number" placeholder="Ingresa la cantidad de horas del segundo video" id="cantidad-horas-2" />
-        <input type="number" placeholder="Ingresa la cantidad de minutos del segundo video" id="cantidad-minutos-2" />
-        <input type="number" placeholder="Ingresa la cantidad de segundos del segundo video" id="cantidad-segundos-2" />
-    </form>
-    <form>
-        <input type="number" placeholder="Ingresa la cantidad de horas del tercer video" id="cantidad-horas-3" />
-        <input type="number" placeholder="Ingresa la cantidad de minutos del tercer video" id="cantidad-minutos-3" />
-        <input type="number" placeholder="Ingresa la cantidad de segundos del tercer video" id="cantidad-segundos-3" />
-    </form>
-    <form>
-        <input type="number" placeholder="Ingresa la cantidad de horas del cuarto video" id="cantidad-horas-4" />
-        <input type="number" placeholder="Ingresa la cantidad de minutos del cuarto video" id="cantidad-minutos-4" />
-        <input type="number" placeholder="Ingresa la cantidad de segundos del cuarto video" id="cantidad-segundos-4" />
-    </form>
-    <form>
-        <input type="number" placeholder="Ingresa la cantidad de horas del quinto video" id="cantidad-horas-5" />
-        <input type="number" placeholder="Ingresa la cantidad de minutos del quinto video" id="cantidad-minutos-5" />
-        <input type="number" placeholder="Ingresa la cantidad de segundos del quinto video" id="cantidad-segundos-5" />
-    </form>
-    <form>
-        <button type="button" id="calcular-tiempo-total">Calcular tiempo total</button>
-    </form>
-    <div>El tiempo total de los videos es...<strong id="tiempo-total"></strong></div>
     <script type="text/javascript" src="tarea-3.js"></script>
 </body>
 </html>
