@@ -7,24 +7,11 @@
     <title>Tarea 4</title>
 </head>
 <body>
-    <ol>
-        <!-- lista de prueba -->
-        <li class="lista">1</li>
-        <li class="lista">2</li>
-        <li class="lista">3</li>
-        <li class="lista">4</li>
-        <li class="lista">6</li>
-        <li class="lista">5</li>
-        <li class="lista">5</li>
-    </ol>
-    <div>
-        <p>
-            El promedio es ... <em id="promedio"></em><br>
-            El número más pequeño es ... <em id="numero-pequeño"></em><br>
-            El número más grande es ... <em id="numero-grande"></em><br>
-            El número más frecuente es ... <em id="numero-frecuente"></em><br>
-        </p>
-    </div>
+    <form onsubmit="return false">
+        <label for="cantidad-numeros-ingresar">Ingrese la cantidad de números a ingresar</label>
+        <input type="number" id="cantidad-numeros-ingresar" />
+        <button type="button" id="continuar">Continuar</button>
+    </form>
     <script type="text/javascript" src="tarea4.js"></script>
 </body>
 </html>
