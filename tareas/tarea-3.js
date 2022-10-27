@@ -88,6 +88,10 @@ const $botonContinuar = document.querySelector('#continuar');
 $botonContinuar.onclick = function(){
     const formularioVideo = document.createElement('form');
     for (let i = 0; i < Number(document.querySelector('#cantidad-videos').value); i++){
+        const titulo = document.createElement(`h4`);
+        const textoTitulo = document.createTextNode(`Clase ${i + 1}`);
+        titulo.appendChild(textoTitulo);
+        formularioVideo.appendChild(titulo);
         formularioVideo.appendChild(crearLabel('horas'));
         formularioVideo.appendChild(crearInput('horas'));
         formularioVideo.appendChild(crearLabel('minutos'));
@@ -100,9 +104,9 @@ $botonContinuar.onclick = function(){
     formularioVideo.appendChild(crearBotonCalcular());
     formularioVideo.appendChild(crearBotonLimpiar());
     document.querySelector('body').appendChild(formularioVideo);
-    document.querySelector('body').appendChild(crearDiv());
     const $botonCalcular = document.querySelector('#calcular-tiempo-total');
     $botonCalcular.onclick = function(){
+        document.querySelector('body').appendChild(crearDiv());
         const tiempoTotal = calcularTiempo();
         document.querySelector('#tiempo-total').textContent = tiempoTotal;
         return false;
