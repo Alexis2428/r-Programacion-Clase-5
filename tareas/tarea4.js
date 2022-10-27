@@ -22,7 +22,7 @@ function calcularPromedio(numeros) {
     for (let i = 0; i < numeros.length; i++) {
         sumaTotal += Number(numeros[i].value);
     }
-    return sumaTotal / numeros.length;
+    return (sumaTotal / numeros.length).toFixed(2);
 }
 function obtenerNumeroPequenio(numeros) {
     let numeroPequenio = numeros[0].value;
