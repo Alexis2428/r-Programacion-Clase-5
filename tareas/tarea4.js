@@ -116,6 +116,17 @@ $botonObtenerNumeroFrecuente.onclick = function() {
     const numeros = obtenerNumeros();
     document.querySelector('#numero-frecuente').textContent = obtenerNumeroMasRepetido(numeros);
     return false;
+}
+document.querySelector('body').appendChild(crearBoton('Volver a empezar', 'resetear'));
+const $botonResetear = document.querySelector('#resetear');
+$botonResetear.onclick = function() {
+    document.querySelector('#promedio').textContent = '';
+    document.querySelector('#numero-pequenio').textContent = '';
+    document.querySelector('#numero-grande').textContent = '';
+    document.querySelector('#numero-frecuente').textContent = '';
+    const padre = document.querySelector('#lista');
+    while (padre.lastChild) {
+        padre.removeChild(padre.lastChild);
     }
     return false;
 }
