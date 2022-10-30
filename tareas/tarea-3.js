@@ -83,6 +83,15 @@ document.querySelector('#boton').appendChild(crearBoton('calcular-tiempo-total',
 const $botonCalcular = document.querySelector('#calcular-tiempo-total');
 $botonCalcular.onclick = function() {
     document.querySelector('#tiempo-total').textContent = calcularTiempoTotal();
+    return false;
+}
+document.querySelector('body').appendChild(crearBoton('resetear', 'Volver a empezar'));
+const $botonResetear = document.querySelector('#resetear');
+$botonResetear.onclick = function() {
+    document.querySelector('#tiempo-total').textContent = '';
+    const padre = document.querySelector('#formulario-videos');
+    while (padre.lastChild) {
+        padre.removeChild(padre.lastChild);
     }
     return false;
 }
