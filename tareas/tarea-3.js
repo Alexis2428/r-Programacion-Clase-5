@@ -5,43 +5,12 @@
 // al apretar el botón "Calcular tiempo total", debe mostrar en un
 // <strong> pre-creado el tiempo total de los videos.
 
-function crearBotonLimpiar(){
-    const botonLimpiar = document.createElement('button');
-    botonLimpiar.setAttribute('type', 'reset');
-    const textoBotonLimpiar = document.createTextNode('Limpiar');
-    botonLimpiar.appendChild(textoBotonLimpiar);
-    return botonLimpiar;
-}
-function crearBotonCalcular(){
-    const botonCalcular = document.createElement('button');
-    botonCalcular.setAttribute('type', 'button');
-    botonCalcular.setAttribute('id', 'calcular-tiempo-total');
-    const textoBotonCalcular = document.createTextNode('Calcular tiempo total');
-    botonCalcular.appendChild(textoBotonCalcular);
-    return botonCalcular;
-}
-
-function crearInput(texto){
-    const elementoInput = document.createElement('input');
-    elementoInput.setAttribute('type', 'number');
-    elementoInput.setAttribute('class', `cantidad-${texto}`);
-    return elementoInput;
-}
-function crearLabel(texto){
-    const elementoLabel = document.createElement('label');
-    const textoLabel = document.createTextNode(`Ingrese la cantidad de ${texto} del video`);
-    elementoLabel.appendChild(textoLabel);
-    return elementoLabel;
-}
-
-function crearDiv (){
-    const elementoDiv = document.createElement('div');
-    const textoDiv = document.createTextNode('El tiempo total de los videos es ... ');
-    elementoDiv.appendChild(textoDiv);
-    const elementoStrong = document.createElement('strong');
-    elementoStrong.setAttribute('id', 'tiempo-total');
-    elementoDiv.appendChild(elementoStrong);
-    return elementoDiv;
+function crearBoton(id, texto){
+    const boton = document.createElement('button');
+    boton.setAttribute('type', 'button');
+    boton.setAttribute('id', id);
+    boton.textContent = texto;
+    return boton;
 }
 
 function calcularSegundos(){
@@ -68,7 +37,7 @@ function calcularHoras(){
     }
     return total;
 }
-function calcularTiempo(){
+function calcularTiempoTotal(){
     let totalSegundos = calcularSegundos();
     let totalMinutos = calcularMinutos();
     let totalHoras = calcularHoras();
@@ -84,32 +53,36 @@ function calcularTiempo(){
     return (`${totalHoras} horas, ${totalMinutos} minutos y ${totalSegundos} segundos`);
 }
 
+function crearInputConLabel(texto) {
+    const label = document.createElement('label');
+    label.textContent = (`Ingrese la cantidad de ${texto} del video `);
+    const input = document.createElement('input');
+    input.setAttribute('type', 'number');
+    input.className = (`cantidad-${texto}`);
+    const $formulario = document.querySelector('#formulario-videos');
+    $formulario.appendChild(label);
+    $formulario.appendChild(input);
+    return;
+}
+
 const $botonContinuar = document.querySelector('#continuar');
 $botonContinuar.onclick = function(){
-    const formularioVideo = document.createElement('form');
+    const $formulario = document.querySelector('#formulario-videos');
     for (let i = 0; i < Number(document.querySelector('#cantidad-videos').value); i++){
         const titulo = document.createElement(`h4`);
-        const textoTitulo = document.createTextNode(`Clase ${i + 1}`);
-        titulo.appendChild(textoTitulo);
-        formularioVideo.appendChild(titulo);
-        formularioVideo.appendChild(crearLabel('horas'));
-        formularioVideo.appendChild(crearInput('horas'));
-        formularioVideo.appendChild(crearLabel('minutos'));
-        formularioVideo.appendChild(crearInput('minutos'));
-        formularioVideo.appendChild(crearLabel('segundos'));
-        formularioVideo.appendChild(crearInput('segundos'));
-        const siguienteLinea = document.createElement('br');
-        formularioVideo.appendChild(siguienteLinea);
+        titulo.textContent = `Clase ${i + 1}`;
+        $formulario.appendChild(titulo);
+        crearInputConLabel('horas');
+        crearInputConLabel('minutos');
+        crearInputConLabel('segundos');
+        $formulario.appendChild(document.createElement('br'));
     }
-    formularioVideo.appendChild(crearBotonCalcular());
-    formularioVideo.appendChild(crearBotonLimpiar());
-    document.querySelector('body').appendChild(formularioVideo);
-    const $botonCalcular = document.querySelector('#calcular-tiempo-total');
-    $botonCalcular.onclick = function(){
-        document.querySelector('body').appendChild(crearDiv());
-        const tiempoTotal = calcularTiempo();
-        document.querySelector('#tiempo-total').textContent = tiempoTotal;
-        return false;
+    return false;
+}
+document.querySelector('#boton').appendChild(crearBoton('calcular-tiempo-total', 'Calcular tiempo total'));
+const $botonCalcular = document.querySelector('#calcular-tiempo-total');
+$botonCalcular.onclick = function() {
+    document.querySelector('#tiempo-total').textContent = calcularTiempoTotal();
     }
     return false;
 }
