@@ -52,7 +52,9 @@ function obtenerNumeros() {
     const listaNumeros = document.querySelectorAll('.lista');
     const numeros = [];
     listaNumeros.forEach(numero => {
-        numeros.push(Number(numero.value));
+        if (Number(numero.value) !== 0) {
+            numeros.push(Number(numero.value));
+        }
     })
     return numeros;
 }
