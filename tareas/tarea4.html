@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>Tarea 4</title>
 </head>
 <body>
-    <form onsubmit="return false">
-        <label for="cantidad-numeros-ingresar">Ingrese la cantidad de números a ingresar</label>
-        <input type="number" id="cantidad-numeros-ingresar" />
-        <button type="button" id="continuar">Continuar</button>
-        <button type="reset">Limpiar</button>
+    <form id="calculador-numeros">
+        <label for="cantidad-numeros">Ingrese la cantidad de numeros a ingresar en la lista</label>
+        <input type="number" id="cantidad-numeros" />
+        <button type="submit" id="continuar">Continuar</button>
+
+        <ol id="lista-numeros"></ol>
+
+        <div id="botones-calculos" class="oculto">
+            <label>Presione el boton para hacer el calculo correspondiente </label>
+            <button type="button" id="obtener-promedio">Obtener promedio </button>
+            <button type="button" id="obtener-numero-pequenio">Obtener el número más pequeño </button>
+            <button type="button" id="obtener-numero-grande">Obtener el número más grande </button>
+            <button type="button" id="obtener-numero-frecuente">Obtener el número más frecuente </button>
+        </div>
+
+        <div>
+            <p id="respuesta-numero-promedio" class="oculto">El promedio es ... <em id="numero-promedio"></em></p>
+            <p id="respuesta-numero-pequenio" class="oculto">El número más pequeño es ... <em id="numero-pequenio"></em></p>
+            <p id="respuesta-numero-grande" class="oculto">El número más grande es ... <em id="numero-grande"></em></p>
+            <p id="respuesta-numero-frecuente" class="oculto">El número más frecuente es ... <em id="numero-frecuente"></em></p>
+        </div>
+
+        <button type="reset" id="reiniciar" class="oculto">Reiniciar</button>
     </form>
-    <ol id="lista"></ol>
-    <div id="botones"></div>
-    <p>
-        El promedio es ... <em id="promedio"></em> <br>
-        El número más pequeño es ... <em id="numero-pequenio"></em> <br>
-        El número más grande es ... <em id="numero-grande"></em> <br>
-        El número más frecuente es ... <em id="numero-frecuente"></em> <br>
-    </p>
     <script type="text/javascript" src="calculos.js"></script>
+    <script type="text/javascript" src="mostrar-ocultar_elementos.js"></script>
     <script type="text/javascript" src="tarea4.js"></script>
 </body>
 </html>

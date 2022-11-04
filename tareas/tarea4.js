@@ -5,88 +5,103 @@
 // 3. obtener el número más grande y mostrarlo en un <em> pre-creado con el texto "El número más grande es..."
 // 4. obtener el número que más se repite y mostrarlo en un <em> pre-creado con el texto "El número más frecuente es..."
 
-
-function obtenerNumeros() {
-    const listaNumeros = document.querySelectorAll('.lista');
-    const numeros = [];
-    listaNumeros.forEach(numero => {
-        if (Number(numero.value) !== 0) {
-            numeros.push(Number(numero.value));
-        }
-    })
-    return numeros;
-}
-
-function crearBoton(texto, id){
-    const boton = document.createElement('button');
-    boton.setAttribute('type', 'button');
-    boton.setAttribute('id', id);
-    boton.textContent = texto;
-    return boton;
-}
-
-function crearNodoLista(){
-    const elementoLista = document.createElement('li');
-    const elementoInput = document.createElement('input');
-    elementoInput.setAttribute('type', 'number');
-    elementoInput.className = 'lista';
-    elementoLista.appendChild(elementoInput);
-    return elementoLista;
-}
-function crearLista(){
-    const $lista = document.querySelector('#lista');
-    const label = document.createElement('label');
-    label.textContent = 'Ingrese los números';
-    $lista.appendChild(label);
-    for (let i = 0; i < Number(document.querySelector('#cantidad-numeros-ingresar').value); i++) {
-        $lista.appendChild(crearNodoLista());
-    }
-    return;
-}
-
 const $botonContinuar = document.querySelector('#continuar');
-$botonContinuar.onclick = function () {
+$botonContinuar.onclick = function(event) {
+    borrarListaAnterior();
     crearLista();
-    return false;
+
+    event.preventDefault();
 }
-document.querySelector('#botones').appendChild(crearBoton('Calcular el promedio', 'calcular-promedio'));
-const $botonCalcularPromedio = document.querySelector('#calcular-promedio');
-$botonCalcularPromedio.onclick = function() {
+
+const $botonObtenerPromedio = document.querySelector('#obtener-promedio');
+$botonObtenerPromedio.onclick = function() {
     const numeros = obtenerNumeros();
-    document.querySelector('#promedio').textContent = calcularPromedio(numeros);
-    return false;
+
+    obtenerRespuesta('promedio', obtenerPromedio(numeros));
+    mostrarRespuesta('promedio');
 }
-document.querySelector('#botones').appendChild(crearBoton('Obtener el número más pequeño', 'obtener-numero-pequenio'));
+
 const $botonObtenerNumeroPequenio = document.querySelector('#obtener-numero-pequenio');
 $botonObtenerNumeroPequenio.onclick = function() {
     const numeros = obtenerNumeros();
-    document.querySelector('#numero-pequenio').textContent = obtenerNumeroPequenio(numeros);
-    return false;
+
+    obtenerRespuesta('pequenio', obtenerNumeroMenor(numeros));
+    mostrarRespuesta('pequenio');
 }
-document.querySelector('#botones').appendChild(crearBoton('Obtener el número más grande', 'obtener-numero-grande'));
+
 const $botonObtenerNumeroGrande = document.querySelector('#obtener-numero-grande');
 $botonObtenerNumeroGrande.onclick = function() {
     const numeros = obtenerNumeros();
-    document.querySelector('#numero-grande').textContent = obtenerNumeroGrande(numeros);
-    return false;
+
+    obtenerRespuesta('grande', obtenerNumeroMayor(numeros));
+    mostrarRespuesta('grande');
 }
-document.querySelector('#botones').appendChild(crearBoton('Obtener el número que más se repite', 'obtener-numero-frecuente'));
+
 const $botonObtenerNumeroFrecuente = document.querySelector('#obtener-numero-frecuente');
 $botonObtenerNumeroFrecuente.onclick = function() {
     const numeros = obtenerNumeros();
-    document.querySelector('#numero-frecuente').textContent = obtenerNumeroMasRepetido(numeros);
-    return false;
+
+    obtenerRespuesta('frecuente', obtenerNumeroFrecuente(numeros));
+    mostrarRespuesta('frecuente');
 }
-document.querySelector('body').appendChild(crearBoton('Volver a empezar', 'resetear'));
-const $botonResetear = document.querySelector('#resetear');
-$botonResetear.onclick = function() {
-    document.querySelector('#promedio').textContent = '';
-    document.querySelector('#numero-pequenio').textContent = '';
-    document.querySelector('#numero-grande').textContent = '';
-    document.querySelector('#numero-frecuente').textContent = '';
-    const padre = document.querySelector('#lista');
-    while (padre.lastChild) {
-        padre.removeChild(padre.lastChild);
+
+const $botonReiniciar = document.querySelector('#reiniciar');
+$botonReiniciar.onclick = function() {
+    ocultarRespuestas();
+    ocultarBotonesCalculos();
+    borrarListaAnterior();
+    ocultarBotonReiniciar();
+}
+
+function borrarListaAnterior() {
+    const $numeros = document.querySelectorAll('.numero');
+    for (let i = 0; i < $numeros.length; i++) {
+        $numeros[i].remove();
     }
-    return false;
+}
+
+function crearLista() {
+    const cantidadNumeros = Number(document.querySelector('#cantidad-numeros').value);
+    if (0 < cantidadNumeros) {
+        mostrarBotonesCalculos();
+        mostrarBotonReiniciar();
+    } else {
+        ocultarRespuestas();
+        ocultarBotonesCalculos();
+    }
+
+    for (let i = 0; i < cantidadNumeros; i++) {
+        crearNumero();
+    }
+}
+
+function crearNumero() {
+    const $numero = document.createElement('li');
+    $numero.className = 'numero';
+
+    const $label = document.createElement('label');
+    $label.textContent = `Ingrese el número `;
+    const $input = document.createElement('input');
+    $input.type = 'number';
+
+    $numero.appendChild($label);
+    $numero.appendChild($input);
+
+    const $listaNumeros = document.querySelector('#lista-numeros');
+    $listaNumeros.appendChild($numero);
+}
+
+function obtenerNumeros() {
+    const numeros = [];
+    const $numeros = document.querySelectorAll('.numero input');
+    for (let i = 0; i < $numeros.length; i++) {
+        if ('' !== $numeros[i].value) {
+            numeros.push(Number($numeros[i].value));
+        }
+    }
+    return numeros;
+}
+
+function obtenerRespuesta(tipo, valor) {
+    document.querySelector(`#numero-${tipo}`).textContent = valor;
 }
