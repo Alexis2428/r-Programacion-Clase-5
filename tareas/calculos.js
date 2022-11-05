@@ -3,7 +3,7 @@ function obtenerPromedio(numeros) {
     for (let i = 0; i < numeros.length; i++) {
         sumaTotal += numeros[i];
     }
-    return (sumaTotal / numeros.length).toFixed(2);
+    return (sumaTotal / numeros.length);
 }
 
 function obtenerNumeroMenor(numeros) {

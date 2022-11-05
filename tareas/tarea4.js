@@ -7,17 +7,17 @@
 
 const $botonContinuar = document.querySelector('#continuar');
 $botonContinuar.onclick = function(event) {
+    event.preventDefault();
+
     borrarListaAnterior();
     crearLista();
-
-    event.preventDefault();
 }
 
 const $botonObtenerPromedio = document.querySelector('#obtener-promedio');
 $botonObtenerPromedio.onclick = function() {
     const numeros = obtenerNumeros();
 
-    obtenerRespuesta('promedio', obtenerPromedio(numeros));
+    obtenerRespuesta('promedio', obtenerPromedio(numeros).toFixed(2));
     mostrarRespuesta('promedio');
 }
 
@@ -79,13 +79,13 @@ function crearNumero() {
     const $numero = document.createElement('li');
     $numero.className = 'numero';
 
-    const $label = document.createElement('label');
-    $label.textContent = `Ingrese el número `;
-    const $input = document.createElement('input');
-    $input.type = 'number';
+    const $texto = document.createElement('label');
+    $texto.textContent = `Ingrese el número `;
+    const $cuadroTexto = document.createElement('input');
+    $cuadroTexto.type = 'number';
 
-    $numero.appendChild($label);
-    $numero.appendChild($input);
+    $numero.appendChild($texto);
+    $numero.appendChild($cuadroTexto);
 
     const $listaNumeros = document.querySelector('#lista-numeros');
     $listaNumeros.appendChild($numero);
