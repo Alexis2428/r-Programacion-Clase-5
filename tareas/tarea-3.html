@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>Clase 5</title>
 </head>
 <body>
-    <form onsubmit="return false">
-        <label for="cantidad-videos">Ingrese cantidad de videos</label>
-        <input type="number" id="cantidad-videos"/>
-        <button type="button" id="continuar">Continuar</button>
-        <button type="reset">Limpiar</button>
+    <form id="calculador-videos">
+        <label for="cantidad-clases">Ingrese la cantidad de clases </label>
+        <input type="number" id="cantidad-clases" />
+        <button type="submit" id="continuar">Continuar</button>
+
+        <div id="videos"></div>
+
+        <button type="button" id="calcular" class="oculto">Calcular tiempo total</button>
+
+        <div id="respuesta" class="oculto">
+            <p>El tiempo total de los videos es ... <strong id="tiempo-total"></strong></p>
+        </div>
+
+        <button type="reset" id="reiniciar" class="oculto">Reiniciar</button>
     </form>
-    <form id="formulario-videos"></form>
-    <div id="boton"></div>
-    <p>
-        El tiempo total de los videos es ... <strong id="tiempo-total"> </strong>
-    </p>
     <script type="text/javascript" src="tarea-3.js"></script>
 </body>
 </html>

@@ -5,93 +5,124 @@
 // al apretar el botón "Calcular tiempo total", debe mostrar en un
 // <strong> pre-creado el tiempo total de los videos.
 
-function crearBoton(id, texto){
-    const boton = document.createElement('button');
-    boton.setAttribute('type', 'button');
-    boton.setAttribute('id', id);
-    boton.textContent = texto;
-    return boton;
+const $botonContinuar = document.querySelector('#continuar');
+$botonContinuar.onclick = function(event) {
+    event.preventDefault();
+
+    borrarVideosAnteriores();
+    crearVideos();
 }
 
-function calcularSegundos(){
-    let total = 0;
-    const segundos = document.querySelectorAll('.cantidad-segundos');
-    for (let i = 0; i < segundos.length; i++){
-        total += Number(segundos[i].value);
+const $botonCalcular = document.querySelector('#calcular');
+$botonCalcular.onclick = obtenerRespuesta;
+
+const $botonReiniciar = document.querySelector('#reiniciar');
+$botonReiniciar.onclick = reiniciar;
+
+function borrarVideosAnteriores() {
+    const $videos = document.querySelectorAll('.video');
+    for (let i = 0; i < $videos.length; i++) {
+        $videos[i].remove();
     }
-    return total;
 }
-function calcularMinutos(){
-    let total = 0;
-    const minutos = document.querySelectorAll('.cantidad-minutos');
-    for (let i = 0; i < minutos.length; i++) {
-        total += Number(minutos[i].value);
+
+function crearVideos() {
+    const cantidadClases = Number(document.querySelector('#cantidad-clases').value);
+
+    if (0 < cantidadClases) {
+        mostrarBotonCalcular();
+        mostrarBotonReiniciar();
     }
-    return total;
-}
-function calcularHoras(){
-    let total = 0;
-    const horas = document.querySelectorAll('.cantidad-horas');
-    for (let i = 0; i< horas.length; i++) {
-        total += Number(horas[i].value);
+
+    for (let i = 0; i < cantidadClases; i++) {
+        crearVideo(i);
     }
-    return total;
 }
-function calcularTiempoTotal(){
-    let totalSegundos = calcularSegundos();
-    let totalMinutos = calcularMinutos();
-    let totalHoras = calcularHoras();
+
+function crearVideo(indice) {
+    const $video = document.createElement('div');
+    $video.className = 'video';
+
+    const $tituloClase = document.createElement('h4');
+    $tituloClase.textContent = `Clase ${indice + 1}`;
+    $video.appendChild($tituloClase);
+
+    crearTiempoVideo('horas', $video);
+    crearTiempoVideo('minutos', $video);
+    crearTiempoVideo('segundos', $video);
+
+    const $videos = document.querySelector('#videos');
+    $videos.appendChild($video);
+}
+
+function crearTiempoVideo(tipo, $video) {
+    const $texto = document.createElement('label');
+    $texto.textContent = `Ingrese la cantidad de ${tipo} del video de la clase `;
+    const $cuadroTexto = document.createElement('input');
+    $cuadroTexto.type = 'number';
+    $cuadroTexto.className = `cantidad-${tipo}`;
+
+    $video.appendChild($texto);
+    $video.appendChild($cuadroTexto);
+}
+
+function obtenerRespuesta() {
+    document.querySelector('#tiempo-total').textContent = obtenerTiempoTotal();
+    mostrarRespuesta();
+}
+
+function obtenerTiempoTotal() {
+    let totalSegundos = calcularTiempo('segundos');
+    let totalMinutos = calcularTiempo('minutos');
+    let totalHoras = calcularTiempo('horas');
     const LIMITE_SEGUNDOS_MINUTOS = 60;
-    while (totalSegundos > LIMITE_SEGUNDOS_MINUTOS) {
+    while (LIMITE_SEGUNDOS_MINUTOS < totalSegundos) {
         totalSegundos -= LIMITE_SEGUNDOS_MINUTOS;
         totalMinutos++;
     }
-    while (totalMinutos > LIMITE_SEGUNDOS_MINUTOS) {
+    while (LIMITE_SEGUNDOS_MINUTOS < totalMinutos) {
         totalMinutos -= LIMITE_SEGUNDOS_MINUTOS;
         totalHoras++;
     }
     return (`${totalHoras} horas, ${totalMinutos} minutos y ${totalSegundos} segundos`);
 }
 
-function crearInputConLabel(texto) {
-    const label = document.createElement('label');
-    label.textContent = (`Ingrese la cantidad de ${texto} del video `);
-    const input = document.createElement('input');
-    input.setAttribute('type', 'number');
-    input.className = (`cantidad-${texto}`);
-    const $formulario = document.querySelector('#formulario-videos');
-    $formulario.appendChild(label);
-    $formulario.appendChild(input);
-    return;
+function calcularTiempo(tipo) {
+    let total = 0;
+    const $tiempo = document.querySelectorAll(`.cantidad-${tipo}`);
+    for (let i = 0; i < $tiempo.length; i++) {
+        total += Number($tiempo[i].value);
+    }
+    return total;
 }
 
-const $botonContinuar = document.querySelector('#continuar');
-$botonContinuar.onclick = function(){
-    const $formulario = document.querySelector('#formulario-videos');
-    for (let i = 0; i < Number(document.querySelector('#cantidad-videos').value); i++){
-        const titulo = document.createElement(`h4`);
-        titulo.textContent = `Clase ${i + 1}`;
-        $formulario.appendChild(titulo);
-        crearInputConLabel('horas');
-        crearInputConLabel('minutos');
-        crearInputConLabel('segundos');
-        $formulario.appendChild(document.createElement('br'));
-    }
-    return false;
+function reiniciar() {
+    borrarVideosAnteriores();
+    ocultarBotonCalcular();
+    ocultarRespuesta();
+    ocultarBotonReiniciar();
 }
-document.querySelector('#boton').appendChild(crearBoton('calcular-tiempo-total', 'Calcular tiempo total'));
-const $botonCalcular = document.querySelector('#calcular-tiempo-total');
-$botonCalcular.onclick = function() {
-    document.querySelector('#tiempo-total').textContent = calcularTiempoTotal();
-    return false;
+
+function mostrarBotonCalcular() {
+    document.querySelector('#calcular').className = '';
 }
-document.querySelector('body').appendChild(crearBoton('resetear', 'Volver a empezar'));
-const $botonResetear = document.querySelector('#resetear');
-$botonResetear.onclick = function() {
-    document.querySelector('#tiempo-total').textContent = '';
-    const padre = document.querySelector('#formulario-videos');
-    while (padre.lastChild) {
-        padre.removeChild(padre.lastChild);
-    }
-    return false;
+
+function ocultarBotonCalcular() {
+    document.querySelector('#calcular').className = 'oculto';
+}
+
+function mostrarBotonReiniciar() {
+    document.querySelector('#reiniciar').className = '';
+}
+
+function ocultarBotonReiniciar() {
+    document.querySelector('#reiniciar').className = 'oculto';
+}
+
+function mostrarRespuesta() {
+    document.querySelector('#respuesta').className = '';
+}
+
+function ocultarRespuesta() {
+    document.querySelector('#respuesta').className = 'oculto';
 }
