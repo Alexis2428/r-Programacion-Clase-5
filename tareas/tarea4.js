@@ -105,3 +105,11 @@ function obtenerNumeros() {
 function obtenerRespuesta(tipo, valor) {
     document.querySelector(`#numero-${tipo}`).textContent = valor;
 }
+
+function validarNumeros(numeros) {
+    if (0 === numeros.length) {
+        return 'Debe ingresar números en la lista antes de pulsar un botón';
+    }
+
+    return '';
+}
