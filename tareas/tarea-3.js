@@ -6,7 +6,7 @@
 // <strong> pre-creado el tiempo total de los videos.
 
 const $botonContinuar = document.querySelector('#continuar');
-$botonContinuar.onclick = function(event) {
+$botonContinuar.onclick = function (event) {
     event.preventDefault();
 
     borrarVideosAnteriores();
