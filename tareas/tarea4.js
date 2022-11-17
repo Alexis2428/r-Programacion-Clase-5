@@ -6,7 +6,7 @@
 // 4. obtener el número que más se repite y mostrarlo en un <em> pre-creado con el texto "El número más frecuente es..."
 
 const $botonContinuar = document.querySelector('#continuar');
-$botonContinuar.onclick = function(event) {
+$botonContinuar.onclick = function (event) {
     event.preventDefault();
 
     borrarListaAnterior();
@@ -14,7 +14,7 @@ $botonContinuar.onclick = function(event) {
 }
 
 const $botonObtenerPromedio = document.querySelector('#obtener-promedio');
-$botonObtenerPromedio.onclick = function() {
+$botonObtenerPromedio.onclick = function () {
     const numeros = obtenerNumeros();
 
     if ('' === validarNumeros(numeros)) {
@@ -26,7 +26,7 @@ $botonObtenerPromedio.onclick = function() {
 }
 
 const $botonObtenerNumeroPequenio = document.querySelector('#obtener-numero-pequenio');
-$botonObtenerNumeroPequenio.onclick = function() {
+$botonObtenerNumeroPequenio.onclick = function () {
     const numeros = obtenerNumeros();
 
     if ('' === validarNumeros(numeros)) {
@@ -38,7 +38,7 @@ $botonObtenerNumeroPequenio.onclick = function() {
 }
 
 const $botonObtenerNumeroGrande = document.querySelector('#obtener-numero-grande');
-$botonObtenerNumeroGrande.onclick = function() {
+$botonObtenerNumeroGrande.onclick = function () {
     const numeros = obtenerNumeros();
 
     if ('' === validarNumeros(numeros)) {
@@ -50,7 +50,7 @@ $botonObtenerNumeroGrande.onclick = function() {
 }
 
 const $botonObtenerNumeroFrecuente = document.querySelector('#obtener-numero-frecuente');
-$botonObtenerNumeroFrecuente.onclick = function() {
+$botonObtenerNumeroFrecuente.onclick = function () {
     const numeros = obtenerNumeros();
 
     if ('' === validarNumeros(numeros)) {
@@ -66,7 +66,7 @@ $botonObtenerNumeroFrecuente.onclick = function() {
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
-$botonReiniciar.onclick = function() {
+$botonReiniciar.onclick = function () {
     ocultarRespuestas();
     ocultarBotonesCalculos();
     borrarListaAnterior();
