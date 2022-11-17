@@ -17,32 +17,52 @@ const $botonObtenerPromedio = document.querySelector('#obtener-promedio');
 $botonObtenerPromedio.onclick = function() {
     const numeros = obtenerNumeros();
 
-    obtenerRespuesta('promedio', obtenerPromedio(numeros).toFixed(2));
-    mostrarRespuesta('promedio');
+    if ('' === validarNumeros(numeros)) {
+        obtenerRespuesta('promedio', obtenerPromedio(numeros).toFixed(2));
+        mostrarRespuesta('promedio');
+    } else {
+        alert(validarNumeros(numeros));
+    }
 }
 
 const $botonObtenerNumeroPequenio = document.querySelector('#obtener-numero-pequenio');
 $botonObtenerNumeroPequenio.onclick = function() {
     const numeros = obtenerNumeros();
 
-    obtenerRespuesta('pequenio', obtenerNumeroMenor(numeros));
-    mostrarRespuesta('pequenio');
+    if ('' === validarNumeros(numeros)) {
+        obtenerRespuesta('pequenio', obtenerNumeroMenor(numeros));
+        mostrarRespuesta('pequenio');
+    } else {
+        alert(validarNumeros(numeros));
+    }
 }
 
 const $botonObtenerNumeroGrande = document.querySelector('#obtener-numero-grande');
 $botonObtenerNumeroGrande.onclick = function() {
     const numeros = obtenerNumeros();
 
-    obtenerRespuesta('grande', obtenerNumeroMayor(numeros));
-    mostrarRespuesta('grande');
+    if ('' === validarNumeros(numeros)) {
+        obtenerRespuesta('grande', obtenerNumeroMayor(numeros));
+        mostrarRespuesta('grande');
+    } else {
+        alert(validarNumeros(numeros));
+    }
 }
 
 const $botonObtenerNumeroFrecuente = document.querySelector('#obtener-numero-frecuente');
 $botonObtenerNumeroFrecuente.onclick = function() {
     const numeros = obtenerNumeros();
 
-    obtenerRespuesta('frecuente', obtenerNumeroFrecuente(numeros));
-    mostrarRespuesta('frecuente');
+    if ('' === validarNumeros(numeros)) {
+        if (1 < numeros.length) {
+            obtenerRespuesta('frecuente', obtenerNumeroFrecuente(numeros));
+            mostrarRespuesta('frecuente');
+        } else {
+            alert('Debe tener minimo 2 números para obtener el más frecuente');
+        }
+    } else {
+        alert(validarNumeros(numeros));
+    }
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
