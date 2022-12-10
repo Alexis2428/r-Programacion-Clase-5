@@ -5,6 +5,24 @@
 // 3. obtener el número más grande y mostrarlo en un <em> pre-creado con el texto "El número más grande es..."
 // 4. obtener el número que más se repite y mostrarlo en un <em> pre-creado con el texto "El número más frecuente es..."
 
+function validarCantNumeros(cantNumeros) {
+    if ('' === cantNumeros) {
+        return 'El campo cantidad-numeros no puede estar vacio';
+    }
+
+    if (!/^[0-9]+$/.test(cantNumeros)) {
+        return 'El campo cantidad-numeros solo acepta números enteros';
+    }
+
+    return '';
+}
+function validarNumero(numero) {
+    if ('' === numero) {
+        return 'El campo numero no puede estar vacio';
+    }
+
+    return '';
+}
 const $botonContinuar = document.querySelector('#continuar');
 $botonContinuar.onclick = function (event) {
     event.preventDefault();
